@@ -1,0 +1,17 @@
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<% @users.each do |user| %>
+    User Name: <%= user.name %>
+    <% user.shipping_addresses.each do |ship| %>
+        <p>
+            City: <%= ship.city %>
+        </p>
+        <p>
+            Country: <%= ship.country %>
+        </p>
+    <% end %>
+<% end %>
+<h1> Latest Added User Name </h1>
+<%= session['current_user_name'] %> <br>
+<%= link_to 'New User', new_user_path %>
