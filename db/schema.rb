@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_21_103813) do
+ActiveRecord::Schema.define(version: 2020_07_27_104246) do
 
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "age"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.string "part_number"
+    t.decimal "price", precision: 4, scale: 2
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "shipping_addresses", force: :cascade do |t|
@@ -34,5 +44,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_103813) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "products", "users"
   add_foreign_key "shipping_addresses", "users"
 end
