@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     def show
       @user = User.find(params[:id])
       person = Person.new
+      arr = [1, 2, 3, 4, 5]
+      puts arr.length
+      puts arr.size
+      puts arr[0]   
       puts person.serializable_hash
       person.first_name = "fahad"
       puts person.serializable_hash
