@@ -46,6 +46,12 @@ class UsersController < ApplicationController
       render plain: "The parameter 'foo' is set as #{params[:testing].as_json}"
     end
 
+    def test
+      text = "This specification is the spec for a specification"
+      compressor = TextCompressor.new(text)
+      render plain: "#{compressor.unique},#{compressor.index}"
+    end
+
     private
       def user_params
         params.require(:user).permit( :name, :agreement, :email, :email_confirmation, shipping_addresses_attributes: [ :city, :country ] )
