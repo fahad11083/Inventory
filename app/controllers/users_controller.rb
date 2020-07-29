@@ -13,34 +13,6 @@ class UsersController < ApplicationController
 
     def show
       @user = User.find(params[:id])
-      person = Person.new
-      arr = [1, 2, 3, 4, 5]
-      puts arr.length
-      puts arr.size
-      puts arr[0]   
-      puts person.serializable_hash
-      person.first_name = "fahad"
-      puts person.serializable_hash
-      kid = Kid.new
-      kid.grand
-      json = { first_name: "fahad", last_name: "Anwaar" }.to_json
-      person.password = '123'
-      person.password_confirmation = '123'
-      puts person.valid?
-      puts person.password_digest
-      person.from_json(json)
-      render plain: "#{person.as_json}, #{person.first_name}"
-      #render plain: "#{person.first_name},#{person.valid?},#{person.persisted?}"
-      #person.age = 10
-      #person.dob = 300
-      #render plain: "#{person.valid?}"
-      person.update(person.age)
-      #person.first_name = "fahad"
-      #person.last_name = "anwaar"
-      #render plain: "#{ person.age_highest? },#{ person.dob_highest? },#{ person.to_model == person },#{ @user.to_partial_path },#{person.changed?},#{person.changes},"
-      Prawn::Document.generate("hello.pdf") do
-        text "Hello World!"
-      end
     end
 
     def new
@@ -71,7 +43,7 @@ class UsersController < ApplicationController
 
     private
       def user_params
-        params.require(:user).permit( :name, shipping_addresses_attributes: [ :city, :country ] )
+        params.require(:user).permit( :name, :agreement, :email, :email_confirmation, shipping_addresses_attributes: [ :city, :country ] )
       end
 
       def authenticate

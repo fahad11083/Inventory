@@ -1,5 +1,5 @@
+<tr>
 <%= form_for @user do |f| %>
-
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -13,22 +13,38 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-    <%= f.fields_for :shipping_addresses do |ship_form| %>
-      <p>
+</tr>
+  <tr>
+    <td>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </td>
+    <td>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </td>
+    <td>
+      <%= f.label :email_confirmation %>
+      <%= f.text_field :email_confirmation %>
+    </td>
+  </tr>
+  <%= f.fields_for :shipping_addresses do |ship_form| %>
+    <tr>
+      <td>
         <%= ship_form.label :city %>
         <%= ship_form.text_field :city %>
-      </p>
-
-      <p>
+      </td>
+      <td>
         <%= ship_form.label :country %>
         <%= ship_form.text_field :country %>
-      </p>
-    <% end %>
+      </td>
+    </tr>
+  <% end %>  
 
+  <p>
+    <%= f.label :agreement %>
+    <%= f.check_box :agreement %> </br>
+  </p>
+  </tr>
   <%= f.submit  %>
-
 <% end %>

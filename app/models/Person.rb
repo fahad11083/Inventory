@@ -1,7 +1,7 @@
 class  Person
     include ActiveModel::AttributeMethods, ActiveModel::Conversion, ActiveModel::Dirty, ActiveModel::Model, ActiveModel::Serializers::JSON, ActiveModel::SecurePassword
-    extend ActiveModel::Callbacks
-    
+    extend ActiveModel::Callbacks 
+
     has_secure_password
     has_secure_password :recovery_password, validations: false
 
