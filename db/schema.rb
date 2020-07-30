@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_083236) do
+ActiveRecord::Schema.define(version: 2020_07_30_105830) do
 
   create_table "appointments", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_07_30_083236) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "engineer_id"
+    t.integer "human_resource_id"
+    t.index ["engineer_id"], name: "index_employees_on_engineer_id"
+    t.index ["human_resource_id"], name: "index_employees_on_human_resource_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -51,6 +60,15 @@ ActiveRecord::Schema.define(version: 2020_07_30_083236) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "name"
+    t.bigint "imageable_id"
+    t.string "imageable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -82,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_07_30_083236) do
   end
 
   add_foreign_key "books", "authors"
+  add_foreign_key "employees", "employees", column: "engineer_id"
+  add_foreign_key "employees", "employees", column: "human_resource_id"
   add_foreign_key "products", "users"
   add_foreign_key "shipping_addresses", "users"
 end
