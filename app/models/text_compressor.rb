@@ -3,7 +3,7 @@ class TextCompressor
 
   def initialize( text )
     @unique = []
-    @index = []
+    @index = [] 
     add_text( text )
   end
 

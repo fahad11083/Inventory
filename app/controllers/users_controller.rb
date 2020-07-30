@@ -47,10 +47,11 @@ class UsersController < ApplicationController
     end
 
     def test
-      text = "This specification is the spec for a specification"
-      compressor = TextCompressor.new(text)
-      render plain: "#{compressor.unique},#{compressor.index}"
+      doc = Document.new( 'hi', 'russ', 'hello')
+      new_doc = doc + 'out there!'
+      render plain: "#{new_doc.content}"
     end
+
 
     private
       def user_params
