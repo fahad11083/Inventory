@@ -47,9 +47,11 @@ class UsersController < ApplicationController
     end
 
     def test
-      doc = Document.new( 'hi', 'russ', 'hello')
-      new_doc = doc + 'out there!'
-      render plain: "#{new_doc.content}"
+      hash = {}
+      document = Document.new( 'Narcos', 'Esco', 'Never mess in coulumbia')
+      doc_id = DocumentIdentifier.new( 'contracts', 'book Deal')
+      hash[doc_id] = document
+      render plain: "#{hash[doc_id].content}"
     end
 
 
