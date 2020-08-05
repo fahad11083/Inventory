@@ -7,8 +7,8 @@ class DocumentPointer
   end
   
   def ==( other )
-    return true unless other.equal?(self)
-    return false unless other.kind_of?(self.class)
+    return false unless other.respond_to?(:folder)
+    return false unless other.respond_to?(:name)
     folder == other.folder && name == other.name
   end 
 end

@@ -1,10 +1,31 @@
 class Document
-  attr_accessor :title, :author, :content
+  @@default_paper_size = :a4
+  @default_font = :times
+
+  def self.default_font=(font)
+    @default_font = font
+  end
+
+  def self.default_font
+    @default_font
+  end
+
+  def self.default_paper_size
+    @@default_paper_size
+  end
+
+  def self.default_paper_size=(new_size)
+    @@default_paper_size = new_size
+  end
+
+  attr_accessor :title, :author, :content, :default_font
 
   def initialize(title, author, content)
     @title = title
     @author = author
     @content = content
+    @paper_size = @@default_paper_size
+    @font = Document.default_font
   end
 
   def +@

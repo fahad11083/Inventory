@@ -1,4 +1,5 @@
 require 'prawn'
+include Rendering
 class UsersController < ApplicationController
   USERS = { "lifo" => "world" }
   before_action :authenticate
@@ -47,11 +48,8 @@ class UsersController < ApplicationController
     end
 
     def test
-      hash = {}
-      document = Document.new( 'Narcos', 'Esco', 'Never mess in coulumbia')
-      doc_id = DocumentIdentifier.new( 'contracts', 'book Deal')
-      hash[doc_id] = document
-      render plain: "#{hash[doc_id].content}"
+      an_inch_full_of_points = Rendering.points_to_inches(1.0)
+      render plain: "#{DEFAULT_PAPER_SIZE.height},#{an_inch_full_of_points}"
     end
 
 
