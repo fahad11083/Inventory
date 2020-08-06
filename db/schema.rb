@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_105830) do
+ActiveRecord::Schema.define(version: 2020_08_06_073435) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_addresses_on_client_id"
+  end
 
   create_table "appointments", force: :cascade do |t|
     t.string "name"
@@ -34,6 +41,21 @@ ActiveRecord::Schema.define(version: 2020_07_30_105830) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "orders_count"
+    t.integer "lock_version"
+    t.string "name"
+  end
+
+  create_table "clients_roles", id: false, force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "role_id"
+    t.index ["client_id"], name: "index_clients_roles_on_client_id"
+    t.index ["role_id"], name: "index_clients_roles_on_role_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -41,6 +63,13 @@ ActiveRecord::Schema.define(version: 2020_07_30_105830) do
     t.integer "human_resource_id"
     t.index ["engineer_id"], name: "index_employees_on_engineer_id"
     t.index ["human_resource_id"], name: "index_employees_on_human_resource_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_orders_on_client_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -79,6 +108,11 @@ ActiveRecord::Schema.define(version: 2020_07_30_105830) do
     t.decimal "price", precision: 4, scale: 2
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "shipping_addresses", force: :cascade do |t|

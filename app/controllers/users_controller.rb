@@ -1,5 +1,4 @@
 require 'prawn'
-include Rendering
 class UsersController < ApplicationController
   USERS = { "lifo" => "world" }
   before_action :authenticate
@@ -48,10 +47,15 @@ class UsersController < ApplicationController
     end
 
     def test
-      an_inch_full_of_points = Rendering.points_to_inches(1.0)
-      render plain: "#{DEFAULT_PAPER_SIZE.height},#{an_inch_full_of_points}"
+      logger =  Rails.logger
+      sher = Sherlock.new(logger)
+       puts "#{sher.investigate}"
+      my_tome = Document.new('pablo', 'esco', 'Never mess with pablo esco bar')
+      words = my_tome.each_word {|word| puts word}
+      characters = my_tome.each_character {|content| puts content}
+      enum = Enumerator.new( my_tome, :each_character )
+      render plain: "#{words },#{characters},#{enum.count}"
     end
-
 
     private
       def user_params
