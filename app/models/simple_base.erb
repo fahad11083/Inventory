@@ -1,0 +1,9 @@
+class SimpleBase
+  def self.inherited( new_subclass )
+    puts "hey, #{new_subclass} is now a subclass of #{self}!" 
+  end
+
+  def just_print_parent
+    puts "hello, parent"
+  end
+end

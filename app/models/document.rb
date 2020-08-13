@@ -23,15 +23,30 @@ class Document
     @@default_paper_size = new_size
   end
 
-  attr_accessor :title, :author, :content, :default_font
+  attr_accessor :title, :author, :content, :default_font, :load_listener, :save_listener
 
   def initialize(title, author, content)
     @title = title
     @author = author
     @content = content
     @paper_size = @@default_paper_size
-    @font = Document.default_font
-    
+    @font = Document.default_font  
+  end
+
+  def on_save( &block )
+    @save_listener = block
+  end
+
+  def on_load( &block )
+    @load_listener = block
+  end
+
+  def load( path )
+    @content = path
+    load_listener.call(self, path) if load_listener
+  end
+
+  def save( path )
   end
 
   def each

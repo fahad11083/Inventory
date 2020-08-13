@@ -1,0 +1,5 @@
+class Student < ApplicationRecord
+  has_many :juniors, class_name: "Student", foreign_key: "teacher_assistant_id"
+
+  belongs_to :teacher_assistant, class_name: "Employee"
+end

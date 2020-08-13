@@ -1,0 +1,11 @@
+module Person
+  def self.included(base)
+    puts "#{base} included   #{self}"
+  end
+  
+  def name
+    puts "My name is person"
+  end
+end
+
+User.new.name

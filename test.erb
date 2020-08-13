@@ -1,0 +1,12 @@
+def each_explicit(&block)
+  return to_enum(:each) unless block
+
+  i = 0
+  while i < size
+    block.call at(i)
+    i += 1
+  end
+end
+  
+
+[1,2,3].each { |n| puts "#{n}!" } # the one-line equivalent.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_073435) do
+ActiveRecord::Schema.define(version: 2020_08_11_100552) do
 
   create_table "addresses", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2020_08_06_073435) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
     t.index ["physician_id"], name: "index_appointments_on_physician_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "authors", force: :cascade do |t|
@@ -54,6 +60,14 @@ ActiveRecord::Schema.define(version: 2020_08_06_073435) do
     t.integer "role_id"
     t.index ["client_id"], name: "index_clients_roles_on_client_id"
     t.index ["role_id"], name: "index_clients_roles_on_role_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -100,6 +114,12 @@ ActiveRecord::Schema.define(version: 2020_08_06_073435) do
     t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -131,9 +151,11 @@ ActiveRecord::Schema.define(version: 2020_08_06_073435) do
     t.boolean "agreement"
     t.string "email"
     t.string "email_confirmation"
+    t.boolean "active"
   end
 
   add_foreign_key "books", "authors"
+  add_foreign_key "comments", "posts"
   add_foreign_key "employees", "employees", column: "engineer_id"
   add_foreign_key "employees", "employees", column: "human_resource_id"
   add_foreign_key "products", "users"

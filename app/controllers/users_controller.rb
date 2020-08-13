@@ -49,11 +49,17 @@ class UsersController < ApplicationController
     def test
       logger =  Rails.logger
       sher = Sherlock.new(logger)
-       puts "#{sher.investigate}"
+      puts "#{sher.investigate}"
+      child = ChildClassOne.new
+      child.just_print_child
       my_tome = Document.new('pablo', 'esco', 'Never mess with pablo esco bar')
+      my_tome.on_load do | doc |
+        puts "hey, I've been loaded!"
+      end
       words = my_tome.each_word {|word| puts word}
       characters = my_tome.each_character {|content| puts content}
       enum = Enumerator.new( my_tome, :each_character )
+
       render plain: "#{words },#{characters},#{enum.count}"
     end
 
